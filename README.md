@@ -6,6 +6,7 @@ VENV: Um ambiente virtual em Python isola dependências do projeto, evitando con
 
 O projeto também conta com algumas classes de testes unitários com módulo 'unittest'. Seguem abaixo os comandos para serem executados na raiz do projeto.
 * ```python -m unittest tests/banco/usuario/TestPessoaFisica.py```
+* ```python -m unittest tests/banco/usuario/TestPessoaJuridica.py```
 * ```python -m unittest tests/banco/conta/TestContaCorrente.py```
 * ```python -m unittest tests/banco/conta/TestContaPoupanca.py```
 * ```python -m unittest tests/banco/transacao/TestDeposito.py```
