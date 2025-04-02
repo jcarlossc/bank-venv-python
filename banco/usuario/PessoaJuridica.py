@@ -29,3 +29,13 @@ class PessoaJuridica(Usuario):
             str: O tipo do usuário.
         """
         return self.tipo_usuario
+
+    def __str__(self):
+        """Acessa uma representação dos atributos de pessoa jurídica.
+
+        Retorna:
+            nome (str): O nome do usuário.
+            cpf (str): O cpf do usuário.
+            tipo_usuario (str): O tipo de usuário.
+        """
+        return f"{self.nome} || {self.cpf} || {self.tipo_usuario}"

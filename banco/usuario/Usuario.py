@@ -10,3 +10,11 @@ class Usuario(ABC):
     @abstractmethod
     def get_tipo_usuario(self):
         pass
+
+    def __str__(self):
+        """Acessa uma representação dos atributos do usuário.
+
+        Retorna:
+            nome (str): O nome do usuário.
+        """
+        return f"{self.nome}"

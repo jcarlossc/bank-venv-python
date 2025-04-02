@@ -32,4 +32,11 @@ class Historico:
             array: Os transações do sistema.
         """
         return self.transacoes  
-   
+
+    def __str__(self):
+        """Acessa uma representação das transações.
+
+        Retorna:
+            transações (array): As transações.
+        """
+        return f"{self.transacoes}"        
