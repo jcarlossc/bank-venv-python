@@ -1,8 +1,9 @@
+from banco.usuario.PessoaFisica import PessoaFisica
+from banco.usuario.PessoaJuridica import PessoaJuridica
 from banco.conta.ContaPoupanca import ContaPoupanca
 from banco.conta.ContaCorrente import ContaCorrente
 from banco.extrato.Extrato import Extrato
 from banco.log.Logging import Logging
-from banco.usuario.PessoaFisica import PessoaFisica
 
 class Menu:
     """Classe que representa o menu do sistema. 
@@ -34,37 +35,76 @@ class Menu:
         menu()
 
         while True:
-            opcoes = input("DIGITE A OPÇÃO: ")
+            opcoes = input("\nDIGITE A OPÇÃO: ")
             if opcoes == "1":
-                nome = input("DIGITE SEU NOME: ")
-                cpf = input("DIGITE SEU CPF: ")
-                pessoa_fisica = PessoaFisica(nome, cpf)
-                print("\nUsuário cadastrado com sucesso!")
+                print("---------------------------------------------------------------------------------------")
+                print("1 - Pessoa Física")
+                print("2 - Pessoa Jurídica")
+                print("---------------------------------------------------------------------------------------")
+                opcoes_usuario = input("DIGITE O TIPO DE USUÁRIO: ")
+                if opcoes_usuario == "1":
+                    nome = input("DIGITE SEU NOME: ")
+                    cpf = input("DIGITE SEU CPF: ")
+                    pessoa_fisica = PessoaFisica(nome, cpf)
+                    print("\nUsuário pessoa física cadastrado com sucesso!")
 
-                log.info("Usuário Cadastrado com sucesso.")
+                    log.info("Usuário Cadastrado com sucesso.")
+                elif  opcoes_usuario == "2":
+                    nome = input("DIGITE SEU NOME: ")
+                    cnpj = input("DIGITE SEU CNPJ: ")
+                    pessoa_juridica = PessoaJuridica(nome, cnpj)
+                    print("\nUsuário pessoa Jurídica cadastrado com sucesso!")
 
+                    log.info("Usuário pessoa jurídica cadastrado com sucesso.")
+                else:
+                    print("Escolha inválida. Tente novamente.")
                 menu()
             elif opcoes == "2":
-                try:
-                    cpf = input("DIGITE SEU CPF: ")
-                    if cpf == pessoa_fisica.get_cpf():    
-                        print("---------------------------------------------------------------------------------------")
-                        print("1 - Conta Corrente")
-                        print("2 - Conta Poupança")
-                        print("---------------------------------------------------------------------------------------")
-                        escolha = input("ESCOLHA O TIPO DE CONTA: ")
-                        if escolha == "1":
-                            conta_corrente = ContaCorrente(pessoa_fisica)
-                            print("\nConta Corrente criada com sucesso.")
-                        elif escolha == "2":
-                            conta_poupanca = ContaPoupanca(pessoa_fisica)
-                            print("\nConta Poupança criada com sucesso!")  
+                if opcoes_usuario == "1":
+                    try:
+                        cpf = input("DIGITE SEU CPF: ")
+                        if cpf == pessoa_fisica.get_cpf():    
+                            print("---------------------------------------------------------------------------------------")
+                            print("1 - Conta Corrente")
+                            print("2 - Conta Poupança")
+                            print("---------------------------------------------------------------------------------------")
+                            escolha = input("ESCOLHA O TIPO DE CONTA: ")
+                            if escolha == "1":
+                                conta_corrente = ContaCorrente(pessoa_fisica)
+                                print("\nConta Corrente criada com sucesso.")
+                            elif escolha == "2":
+                                conta_poupanca = ContaPoupanca(pessoa_fisica)
+                                print("\nConta Poupança criada com sucesso!")  
+                            else:
+                                print("Escolha inválida. Tente novamente.")      
                         else:
-                            print("Escolha inválida!")      
-                    else:
-                        print("Cpf não encontrado. Cadastre-se na opção 1")    
-                except:
-                    print("Cpf não encontrado. Cadastre-se na opção 1.")
+                            print("Cpf não encontrado. Cadastre-se na opção 1")    
+                    except:
+                        print("Cpf não encontrado. Cadastre-se na opção 1.")
+
+                elif opcoes_usuario == "2":
+                    try:
+                        cnpj = input("DIGITE SEU CNPJ: ")
+                        if cnpj == pessoa_juridica.get_cnpj():    
+                            print("---------------------------------------------------------------------------------------")
+                            print("1 - Conta Corrente")
+                            print("2 - Conta Poupança")
+                            print("---------------------------------------------------------------------------------------")
+                            escolha = input("ESCOLHA O TIPO DE CONTA: ")
+                            if escolha == "1":
+                                conta_corrente = ContaCorrente(pessoa_juridica)
+                                print("\nConta Corrente criada com sucesso.")
+                            elif escolha == "2":
+                                conta_poupanca = ContaPoupanca(pessoa_juridica)
+                                print("\nConta Poupança criada com sucesso!")  
+                            else:
+                                print("Escolha inválida. Tente novamente.")      
+                        else:
+                            print("Cpf não encontrado. Cadastre-se na opção 1")    
+                    except:
+                        print("Cpf não encontrado. Cadastre-se na opção 1.")
+                else:
+                    print("Opcão inválida. Tente novamente.")            
                 menu()   
             elif opcoes == "3":
                 try:
@@ -88,7 +128,7 @@ class Menu:
                                 print("Valor inválido. Tente novamente.")
                         else:    
                             conta_poupanca.depositar(valor_deposito)
-                            print("Valor da conta poupança depositadocom sucesso!")
+                            print("Valor da conta poupança depositado com sucesso!")
 
                             log.info("Depósito em Conta Poupança realizado.")
                         menu()    
@@ -133,7 +173,7 @@ class Menu:
                     elif escolha == "2":
                         Extrato.get_extrato(conta_poupanca)    
                     else:
-                        print("Escolha inválida")    
+                        print("Escolha inválida. Tente novamente.")    
                 except:
                     print("A opção Extrato não é válida sem uma conta criada.")      
                 menu()           
